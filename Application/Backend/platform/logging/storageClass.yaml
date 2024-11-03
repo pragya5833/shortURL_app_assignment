@@ -1,0 +1,11 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-csi
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer  # Delays volume provisioning until a pod is scheduled
+reclaimPolicy: Retain                    # Prevents deletion of EBS volumes when PVC is deleted
+allowVolumeExpansion: true               # Enables volume resizing
+parameters:
+  type: gp3                              # EBS volume type (e.g., gp2, gp3, io1, io2)
+  fsType: ext4                           # File system type

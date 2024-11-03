@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana
+  namespace: logging
+  labels:
+    app: kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kibana
+  template:
+    metadata:
+      labels:
+        app: kibana
+    spec:
+      containers:
+      - name: kibana
+        image: docker.elastic.co/elasticsearch/elasticsearch/kibana:7.16.3
+        resources:
+          # need more cpu upon initialization, therefore burstable class
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 100m
+        env:
+          - name: ELASTICSEARCH_URL
+            value: http://elasticsearch:9200
+        volumeMounts:
+          - name: config-volume
+            mountPath: /usr/share/kibana/config/kibana.yml
+            subPath: kibana.yml
+        ports:
+        - containerPort: 5601
+          name: ui
+          protocol: TCP
+      volumes:
+      - name: config-volume
+        configMap:
+          name: kibana-configmap
+      # nodeSelector:
+      #   kops.k8s.io/instancegroup: qa.platform
+
+

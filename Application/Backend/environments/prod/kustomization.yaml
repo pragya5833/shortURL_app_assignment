@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+bases:
+  - ./shorturl
+  - ./database
+
+transformers:
+- image-prefix.yaml
+
+images:
+- name: shorturl
+  newTag: 1.0.0
+# - name: nginx
+#   newTag: controller-v1.2.0
+# - name: kube-webhook-certgen
+#   newTag: v20230407

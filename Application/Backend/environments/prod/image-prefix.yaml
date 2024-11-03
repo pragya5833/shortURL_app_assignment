@@ -1,0 +1,9 @@
+apiVersion: builtin
+kind: PrefixTransformer
+metadata:
+  name: image-prefix
+
+prefix: 848417356303.dkr.ecr.us-east-1.amazonaws.com/
+
+fieldSpecs:
+- path: spec/template/spec/containers/image

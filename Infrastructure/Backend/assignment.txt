@@ -1,0 +1,18 @@
+VPC
+data source for AZ 
+subnets in all AZs 
+NAT gateway
+internet gateway
+bastion host 
+NACL 
+EKS 
+s3 + CF + ACM to host 2 apps-- create using tf, deploy with aws s3 sync 
+public ALB + listener + TG + SG + ACM -- create using TF, deploy image using ECR , gitops to deploy, hpa,vpa
+ingress 
+pods including redis, connector
+RDS + SG + subnet group + parameter group -- create using TF , with replication, multi AZ
+prometheus , grafana , alertmanager
+cloudwatch
+alerts
+
+k8s-> hpa/vpa-> 
